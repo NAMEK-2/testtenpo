@@ -1,0 +1,9 @@
+Prueba tecnica tenpo
+
+Daniel Leon
+
+Para iniciar el proyecto
+Ir a la raiz de la aplicación.
+usar comando:
+    Docker-compose up
+    Ir a http://localhost:8070/tenpo/swagger-ui.html#
