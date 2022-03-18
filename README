@@ -9,5 +9,6 @@ Para iniciar el proyecto
 Ir a la raíz de la aplicación.
 Usar comando:
     gradle bootJar
-    Docker-compose up
-    Ir a http://localhost:8070/tenpo/swagger-ui.html#
+    docker-compose up
+Ir a
+    http://localhost:8070/tenpo/swagger-ui.html#
