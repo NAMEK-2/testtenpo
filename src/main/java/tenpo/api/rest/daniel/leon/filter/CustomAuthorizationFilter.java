@@ -36,11 +36,33 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
         Boolean needAuth = Constants.ALL_ROUTE_AUTHORIZATION_TOKEN.get(request.getServletPath());
 
+        if (needAuth == null){
+            try {
+                response.setStatus(OK.value());
+                response.setContentType(APPLICATION_JSON_VALUE);
+                Map<String, String> errors = new HashMap<>();
+                errors.put("message",ServiceMessages.ERROR_OPERATION.getMessage() + "Link Don´t Found");
+                errors.put("status", String.valueOf(ServiceMessages.ERROR_OPERATION.getCode()));
+                new ObjectMapper().writeValue(response.getOutputStream(), errors);
+
+                try {
+                    filterChain.doFilter(cachedBodyHttpServletRequest, response);
+                } catch (Exception ex){
+                    // Ignore
+                }
+
+            } catch (Exception ex){
+                log.error(ex.getMessage());
+            }
+
+        }
+
         if ( needAuth != null && needAuth ){
             try {
                 String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-                if (authHeader != null && !authHeader.isEmpty()) {
-                    String token = authHeader;
+                if (authHeader != null && !authHeader.isEmpty()
+                        && authHeader.length() > Constants.BEARER.length() && authHeader.startsWith(Constants.BEARER)) {
+                    String token = authHeader.substring(Constants.BEARER.length());
                     authenticationService.verifyToken(token);
                 } else {
                     getErrorToken(response,

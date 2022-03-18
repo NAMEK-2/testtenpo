@@ -10,5 +10,5 @@ Ir a la raíz de la aplicación.
 Usar comando:
     gradle bootJar
     docker-compose up
-Ir a
-    http://localhost:8070/tenpo/swagger-ui.html#
+Importar en Postman con el siguiente link
+    https://www.getpostman.com/collections/290b02c31c252c82850f

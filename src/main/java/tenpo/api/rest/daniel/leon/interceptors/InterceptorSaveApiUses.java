@@ -39,8 +39,8 @@ public class InterceptorSaveApiUses implements HandlerInterceptor {
         String token = request.getHeader(AUTHORIZATION);
         String userName = null;
         try {
-            if (token != null && !token.isEmpty() ) {
-                userName = authenticationService.getUserNameFromToken(token);
+            if (token != null && !token.isEmpty() && token.length() > Constants.BEARER.length() ) {
+                userName = authenticationService.getUserNameFromToken(token.substring(Constants.BEARER.length()));
             } else {
                 String jsonString = IOUtils.toString(request.getInputStream());
                 JSONObject json = new JSONObject(jsonString);

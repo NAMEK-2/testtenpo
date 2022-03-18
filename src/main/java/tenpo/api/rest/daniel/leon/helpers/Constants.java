@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Constants {
 
+    public static final String BEARER = "Bearer ";
     public static final Map<String, Boolean> ALL_ROUTE_AUTHORIZATION_TOKEN = new HashMap<>();
     public static final String SECRET_KEY= "SECRET_KEY";
 

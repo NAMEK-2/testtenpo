@@ -19,7 +19,8 @@ public class LogOutService {
 
     public LogOutDtoRS logOut(String token){
         try {
-            String userName = authenticationService.getUserNameFromToken(token);
+            String userName = authenticationService.getUserNameFromToken(
+                    token.substring(Constants.BEARER.length()));
             UserEntity user = userEntityRepository.findUserByUserName(userName);
             deleteToken(user);
             return setResponse(ServiceMessages.SUCCESSFUL_OPERATION.getMessage(),
